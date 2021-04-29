@@ -68,6 +68,11 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
             viewModel.getProducts().observe(viewLifecycleOwner, {
                 viewModel.productList = it as ArrayList<Product>
                 adapter.setData(it)
+
+                if (it.isNotEmpty()) {
+                    binding.errorText.isVisible = false
+                }
+
             })
         }
     }

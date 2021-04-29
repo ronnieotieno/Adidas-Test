@@ -68,7 +68,6 @@ class ProductsAdapter(val onClick: (Product) -> Unit) :
             binding.root.setOnClickListener {
                 onClick.invoke(product)
             }
-
             product.apply {
                 val desc = description.capitalize()
                 val name = name.capitalize()
