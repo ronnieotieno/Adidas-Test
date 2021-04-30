@@ -2,7 +2,9 @@ package dev.ronnie.adidasandroid.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.appbar.AppBarLayout
@@ -11,13 +13,13 @@ import dev.ronnie.adidasandroid.R
 import dev.ronnie.adidasandroid.databinding.FragmentProductDetailsBinding
 import dev.ronnie.adidasandroid.presentation.adapters.RatingsAdapter
 import dev.ronnie.adidasandroid.presentation.viewModels.ProductDetailViewModel
-import dev.ronnie.adidasandroid.presentation.viewModels.ProductListViewModel
 import dev.ronnie.adidasandroid.presentation.viewModels.ViewModelFactory
 import dev.ronnie.adidasandroid.utils.NetworkResource
 import dev.ronnie.adidasandroid.utils.makeSnackBar
 import dev.ronnie.adidasandroid.utils.toast
 import javax.inject.Inject
 import kotlin.math.abs
+
 
 class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
     RatingDialog.SendInterface {
@@ -38,10 +40,17 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
 
         binding = FragmentProductDetailsBinding.bind(view)
         setToolbar()
+        setImageViewSize()
 
+        //passed product
         val product = arguments?.let { args.fromBundle(it).product }
 
-        binding.product = product
+
+        //Bind data to the views
+        binding.apply {
+            binding.product = product
+            isRound = false
+        }
 
         binding.ratingList.adapter = adapter
 
@@ -53,6 +62,19 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
         }
     }
 
+    /**
+     * Inorder for the image to fit properly we need to get display size at runtime programmatically and set the imageview as square
+     **/
+    private fun setImageViewSize() {
+
+        binding.image.layoutParams = ConstraintLayout.LayoutParams(
+            resources.displayMetrics.widthPixels,
+            resources.displayMetrics.widthPixels
+        )
+
+    }
+
+    //setting up the toolbar
     private fun setToolbar() {
         val toolbar = binding.toolbar
 
@@ -65,6 +87,7 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
         }
     }
 
+    //observe changes in the product
     private fun observeReviews(id: String) {
         viewModel.getProduct(id).observe(viewLifecycleOwner, {
             viewModel.product = it
@@ -89,6 +112,7 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
         })
     }
 
+    //send rating and observe the response
     override fun sendRating(rating: Pair<String, Int>) {
         val snackBar = makeSnackBar()
         viewModel.result.observe(viewLifecycleOwner, { event ->

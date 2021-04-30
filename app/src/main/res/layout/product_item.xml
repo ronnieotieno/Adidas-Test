@@ -5,6 +5,9 @@
     android:foreground="?android:selectableItemBackground">
 
     <data>
+        <variable
+            name="isRound"
+            type="java.lang.Boolean" />
 
         <variable
             name="product"
@@ -25,7 +28,8 @@
             android:scaleType="centerInside"
             app:imageFromUrl="@{product.imgUrl}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shouldRound="@{isRound}" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

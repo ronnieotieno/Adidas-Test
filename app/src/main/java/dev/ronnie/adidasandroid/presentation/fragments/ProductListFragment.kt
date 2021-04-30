@@ -45,6 +45,8 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
 
         binding.list.adapter = adapter
 
+
+        //prevent data to be called multiple times when the fragment is resumed
         if (!hasBeenInitialized) {
             loadData()
             hasBeenInitialized = true
@@ -56,6 +58,7 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
         }
     }
 
+    //observe data from the api
     private fun listenToResults() {
         viewModel.result.observe(viewLifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let { resource ->
@@ -70,6 +73,9 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
         })
     }
 
+    /**
+     * Loads data from the local cache, if empty it calls the api which then deposit the data to local db
+     */
     private fun loadData() {
         job?.cancel()
         job = lifecycleScope.launch {
@@ -83,15 +89,19 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
         }
     }
 
+    //navigate sending the product
     private fun navigateToDetails(product: Product) {
         binding.root.findNavController()
             .navigate(ProductListFragmentDirections.toProductDetailFragment(product))
 
     }
 
+    /**
+     * Filter the list based on user query
+     */
+
     @SuppressLint("ClickableViewAccessibility")
     private fun setSearchView() {
-
         binding.searchView.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 adapter.filter(viewModel.productList, s.toString().trim())
@@ -127,6 +137,7 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
 
     }
 
+    //removes the focuse from searchview
     private fun removeFocus() {
         hideSoftKeyboard()
         binding.searchView.isFocusable = false

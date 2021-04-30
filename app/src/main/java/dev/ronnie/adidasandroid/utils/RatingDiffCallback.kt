@@ -4,6 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.entities.Review
 
+/**
+ * Compares items to avoid dropping the whole list when the Adapter ist changes.Effective in filter
+ */
 class RatingDiffCallback(private val oldList: List<Review>, private val newList: List<Review>) :
     DiffUtil.Callback() {
 
@@ -12,7 +15,7 @@ class RatingDiffCallback(private val oldList: List<Review>, private val newList:
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].text=== newList[newItemPosition].text
+        return oldList[oldItemPosition].text === newList[newItemPosition].text
     }
 
     override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean {

@@ -15,6 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
+/**
+ * A [Module] to provide the the [Retrofit] and services [ReviewService], [ProductService]
+ **/
 @Module
 object NetworkModule {
 

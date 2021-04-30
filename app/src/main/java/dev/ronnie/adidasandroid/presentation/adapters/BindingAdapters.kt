@@ -7,24 +7,17 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-
-@BindingAdapter("imageFromUrl")
-fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
+/**
+ * Loads the image to calling [ImageView] using [Glide] using the [androidx.databinding] BindingAdapter
+ * Checks if the image passed needed to be rounded
+ */
+@BindingAdapter("imageFromUrl", "shouldRound")
+fun bindImageFromUrl(view: ImageView, imageUrl: String?, shouldRound: Boolean) {
     if (!imageUrl.isNullOrEmpty()) {
-        Glide.with(view.context)
+        val glide = Glide.with(view.context)
             .load(imageUrl)
             .transition(DrawableTransitionOptions.withCrossFade())
-            .transform(CenterCrop(), RoundedCorners(10))
-            .into(view)
-    }
-}
-
-@BindingAdapter("image")
-fun bindImage(view: ImageView, imageUrl: String?) {
-    if (!imageUrl.isNullOrEmpty()) {
-        Glide.with(view.context)
-            .load(imageUrl)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(view)
+        if (shouldRound) glide.transform(CenterCrop(), RoundedCorners(10))
+        glide.into(view)
     }
 }

@@ -6,6 +6,9 @@ import com.google.gson.reflect.TypeToken
 import dev.ronnie.adidasandroid.data.entities.Review
 import java.lang.reflect.Type
 
+/**
+ * Converts list of [Review] to string that can be stored to room db and vice versa
+ */
 class ReviewConverter {
     private val gSon = Gson()
 

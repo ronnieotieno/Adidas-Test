@@ -20,13 +20,16 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
 
     var productList = ArrayList<Product>()
 
-    suspend fun getProducts() = repository.getProducts()
+    //get all products from the local cache
+    fun getProducts() = repository.getProducts()
 
+    //fetch the products from the api
     fun fetchProducts() = viewModelScope.launch {
         _result.value = Event(NetworkResource.Loading)
         _result.value = Event(repository.fetchProducts())
     }
 
+    //saves the data to local storage
     fun saveData(list: List<Product>) = viewModelScope.launch {
         if (list.isNotEmpty()) {
             repository.saveData(list)

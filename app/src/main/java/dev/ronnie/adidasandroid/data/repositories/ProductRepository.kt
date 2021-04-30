@@ -1,26 +1,26 @@
 package dev.ronnie.adidasandroid.data.repositories
 
-import android.net.Network
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import dev.ronnie.adidasandroid.api.ProductService
 import dev.ronnie.adidasandroid.api.ReviewService
 import dev.ronnie.adidasandroid.data.dao.ProductDao
 import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.entities.Review
-import dev.ronnie.adidasandroid.utils.Event
-import dev.ronnie.adidasandroid.utils.NetworkResource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+
 import javax.inject.Inject
 
+/**
+ * The app repository receiving the data from network, extends [BaseRepository] with generic class to handle exceptions while loading data
+ * calls the [Retrofit] services function to load the data from the api.
+ * Also calls [ProductDao] to access the local database
+ */
 class ProductRepository @Inject constructor(
     private val productService: ProductService,
     private val productDao: ProductDao,
     private val reviewService: ReviewService
 ) : BaseRepository() {
 
-    suspend fun getProducts() = productDao.getAllProducts()
+    fun getProducts() = productDao.getAllProducts()
 
     suspend fun fetchProducts() = safeApiCall {
         productService.getProducts()

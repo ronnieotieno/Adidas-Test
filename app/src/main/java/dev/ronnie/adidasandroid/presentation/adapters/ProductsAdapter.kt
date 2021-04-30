@@ -9,6 +9,11 @@ import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.databinding.ProductItemBinding
 import dev.ronnie.adidasandroid.utils.ProductDiffCallback
 
+/**
+ * A simple [RecyclerView.Adapter] that loads the list of [Product] to the Recyclerview
+ * [onClick] a higher order function that gets triggered when the [ProductsViewHolder.binding] root is clicked passing [Product] at the position
+ * to the calling Fragment/Activity
+ */
 class ProductsAdapter(val onClick: (Product) -> Unit) :
     RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
 
@@ -60,7 +65,7 @@ class ProductsAdapter(val onClick: (Product) -> Unit) :
 
     override fun getItemCount() = productList.size
 
-    inner class ProductsViewHolder(private val binding: ProductItemBinding) :
+    inner class ProductsViewHolder(val binding: ProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setData(product: Product) {
@@ -74,6 +79,7 @@ class ProductsAdapter(val onClick: (Product) -> Unit) :
                 this.description = desc
                 binding.product = this
             }
+            binding.isRound = true
 
         }
 

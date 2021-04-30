@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dev.ronnie.adidasandroid.R
 import dev.ronnie.adidasandroid.databinding.RatingDialogBinding
+import dev.ronnie.adidasandroid.utils.toast
 
 
 class RatingDialog : DialogFragment() {
@@ -29,13 +30,16 @@ class RatingDialog : DialogFragment() {
 
                 val rating = ratingBar.rating.toInt()
 
+                //sends the rating to the parent fragment as pair of rating and text
                 if (text.isNotEmpty() && rating > 0) {
                     mCallback?.sendRating(Pair(text, rating))
                     binding.text.text = null
                     binding.ratingBar.rating = 0f
+                    dialog?.dismiss()
+                } else {
+                    requireContext().toast("Please add both rating and review before submitting")
                 }
 
-                dialog?.dismiss()
             }
             cancel.setOnClickListener {
                 dialog?.dismiss()
@@ -71,6 +75,7 @@ class RatingDialog : DialogFragment() {
         super.onResume()
         val displayRectangle = Rect()
         val window: Window = requireActivity().window
+
 
         window.decorView.getWindowVisibleDisplayFrame(displayRectangle)
 

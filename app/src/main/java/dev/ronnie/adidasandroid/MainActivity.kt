@@ -17,7 +17,12 @@ class MainActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //setting the app theme when the activity is created, when the app starts, it starts with splash theme
+        setTheme(R.style.Theme_AdidasAndroid)
         setContentView(R.layout.activity_main)
+
+        //Host the fragments
 
     }
 }

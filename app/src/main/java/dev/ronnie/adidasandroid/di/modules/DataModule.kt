@@ -11,6 +11,9 @@ import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.repositories.ProductRepository
 import javax.inject.Singleton
 
+/**
+ *  A [Module] to provide the [ProductDao] and [AppDataBase]
+ */
 @Module
 object DataModule {
 

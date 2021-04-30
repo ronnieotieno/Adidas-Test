@@ -8,6 +8,9 @@ import dev.ronnie.adidasandroid.presentation.fragments.ProductListFragment
 
 @Suppress("unused")
 @Module
+/**
+ * A [Module] to provide the the [ProductDetailFragment] and [ProductListFragment]
+ **/
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeListFragment(): ProductListFragment

@@ -19,6 +19,9 @@ import javax.inject.Singleton
         MainActivityModule::class
     ]
 )
+/**
+ * Generates [Component] which is install in the [Application] class.
+ */
 interface AppComponent : AndroidInjector<TheApp> {
     @Component.Builder
     interface Builder {

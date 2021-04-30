@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AdidasAndroid</string>
+    <string name="app_name">Adidas Test</string>
     <string name="price">$%1$d</string>
     <string name="error_text">There was an error fetching new products\nPlease check your internet connection\nClick to retry</string>
     <string name="add_review">Add Review</string>

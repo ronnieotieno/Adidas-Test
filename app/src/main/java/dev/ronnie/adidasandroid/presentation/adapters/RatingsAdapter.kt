@@ -9,9 +9,13 @@ import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.entities.Review
 import dev.ronnie.adidasandroid.databinding.ProductItemBinding
 import dev.ronnie.adidasandroid.databinding.RatingItemBinding
+import dev.ronnie.adidasandroid.presentation.adapters.ProductsAdapter.ProductsViewHolder
 import dev.ronnie.adidasandroid.utils.ProductDiffCallback
 import dev.ronnie.adidasandroid.utils.RatingDiffCallback
 
+/**
+ * A simple [RecyclerView.Adapter] that loads the list of [Review] to the Recyclerview
+ */
 class RatingsAdapter : RecyclerView.Adapter<RatingsAdapter.RatingViewHolder>() {
 
     private val ratingList: ArrayList<Review> = ArrayList()
@@ -24,7 +28,6 @@ class RatingsAdapter : RecyclerView.Adapter<RatingsAdapter.RatingViewHolder>() {
         ratingList.addAll(list)
         diffResult.dispatchUpdatesTo(this)
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RatingViewHolder {
 

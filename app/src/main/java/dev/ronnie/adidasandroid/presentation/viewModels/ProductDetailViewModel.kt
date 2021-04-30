@@ -21,17 +21,32 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
         MutableLiveData()
     val result: LiveData<Event<NetworkResource<Review>>> get() = _result
 
+    /**
+     * @param pair contains the rating plus the review text
+     * check if product isn't null then construct review which is then posted to the api.
+     */
     fun postReview(pair: Pair<String, Int>) = viewModelScope.launch {
 
+        //posts loading
         _result.value = Event(NetworkResource.Loading)
 
         val review = product?.id?.let { Review("", it, pair.second, pair.first) }
 
+        //posts the results can be success or failure
         _result.value = Event(repository.postReview(review!!))
 
     }
 
+    /**
+     * @param id for the id of the product to be queried from the db
+     **/
     fun getProduct(id: String) = repository.getSingleProduct(id)
+
+    /**
+     * Upon successful postage of [Review] update the db, add the added review to list of reviews of the particular
+     * product then update.
+     */
+
     fun updateProduct(review: Review) = viewModelScope.launch {
         product?.let {
             val reviews = it.reviews.toMutableList()

@@ -11,6 +11,11 @@ import dev.ronnie.adidasandroid.presentation.viewModels.ProductListViewModel
 import dev.ronnie.adidasandroid.presentation.viewModels.ViewModelFactory
 import kotlin.reflect.KClass
 
+
+/**
+ * A [Module] to provide the the [ProductDetailViewModel] and [ProductListViewModel]
+ * That is created by [ViewModelFactory]
+ * */
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {

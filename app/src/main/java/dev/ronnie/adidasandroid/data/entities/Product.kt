@@ -7,7 +7,12 @@ import androidx.room.TypeConverters
 import dev.ronnie.adidasandroid.utils.ReviewConverter
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Product Object which also act as [Entity] class with table name
+ */
 @Entity(tableName = "products_table")
+
+//converting the list to string inorder to be stored to db and vice versa inorder to be shown to the user
 @TypeConverters(
     ReviewConverter::class
 )
