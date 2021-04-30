@@ -51,6 +51,11 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
             loadData()
             hasBeenInitialized = true
         }
+
+        //Force fetching of data from the api
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.fetchProducts()
+        }
         listenToResults()
         setSearchView()
         binding.errorText.setOnClickListener {
@@ -62,12 +67,18 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
     private fun listenToResults() {
         viewModel.result.observe(viewLifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let { resource ->
-                binding.errorText.isVisible = resource is NetworkResource.Failure
-                binding.progressCircular.isVisible = resource is NetworkResource.Loading
+
+                binding.errorText.isVisible =
+                    resource is NetworkResource.Failure && adapter.itemCount == 0
+                binding.progressCircular.isVisible =
+                    resource is NetworkResource.Loading && adapter.itemCount == 0
 
                 if (resource is NetworkResource.Success) {
                     viewModel.saveData(resource.value)
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
+                if (resource is NetworkResource.Failure) binding.swipeRefreshLayout.isRefreshing =
+                    false
 
             }
         })
