@@ -32,7 +32,6 @@ class ProductsAdapter(val onClick: (Product) -> Unit) :
 
     }
 
-
     fun setData(list: List<Product>) {
         val diffCallback = ProductDiffCallback(productList, list)
         val diffResult = DiffUtil.calculateDiff(diffCallback)

@@ -2,4 +2,9 @@
     <string name="app_name">AdidasAndroid</string>
     <string name="price">$%1$d</string>
     <string name="error_text">There was an error fetching new products\nPlease check your internet connection\nClick to retry</string>
+    <string name="add_review">Add Review</string>
+    <string name="customer_reviews">Customer Reviews</string>
+    <string name="rating_hint">Tell us more about your rating</string>
+    <string name="submit">SUBMIT</string>
+    <string name="cancel">CANCEL</string>
 </resources>

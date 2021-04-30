@@ -1,14 +1,17 @@
 package dev.ronnie.adidasandroid.data.entities
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import dev.ronnie.adidasandroid.utils.ReviewConverter
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "products_table")
 @TypeConverters(
     ReviewConverter::class
 )
+@Parcelize
 data class Product(
     val currency: String,
     var description: String,
@@ -17,5 +20,5 @@ data class Product(
     val imgUrl: String,
     var name: String,
     val price: Int,
-    val reviews: List<Review>
-)
+    var reviews: List<Review>
+) : Parcelable

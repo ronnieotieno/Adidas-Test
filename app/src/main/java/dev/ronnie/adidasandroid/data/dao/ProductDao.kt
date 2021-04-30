@@ -29,4 +29,8 @@ interface ProductDao {
     fun getAllProducts(): LiveData<List<Product>>
 
 
+    @Query("SELECT COUNT(id) FROM products_table")
+    suspend fun countProducts(): Int
+
+
 }

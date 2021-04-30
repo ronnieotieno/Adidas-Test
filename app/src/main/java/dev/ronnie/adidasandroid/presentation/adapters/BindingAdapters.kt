@@ -18,3 +18,13 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
             .into(view)
     }
 }
+
+@BindingAdapter("image")
+fun bindImage(view: ImageView, imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(view.context)
+            .load(imageUrl)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(view)
+    }
+}

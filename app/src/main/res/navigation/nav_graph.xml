@@ -14,5 +14,10 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="dev.ronnie.adidasandroid.presentation.fragments.ProductDetailFragment"
-        android:label="ProductDetailFragment" />
+        android:label="ProductDetailFragment">
+
+        <argument
+            android:name="product"
+            app:argType="dev.ronnie.adidasandroid.data.entities.Product" />
+    </fragment>
 </navigation>

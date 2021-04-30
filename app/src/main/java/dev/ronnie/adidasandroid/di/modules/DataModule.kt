@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.Module
 import dagger.Provides
 import dev.ronnie.adidasandroid.api.ProductService
+import dev.ronnie.adidasandroid.api.ReviewService
 import dev.ronnie.adidasandroid.data.dao.ProductDao
 import dev.ronnie.adidasandroid.data.db.AppDataBase
 import dev.ronnie.adidasandroid.data.entities.Product
@@ -27,8 +28,8 @@ object DataModule {
     @Provides
     fun providesRepository(
         productService: ProductService,
-        productDao: ProductDao
+        productDao: ProductDao, reviewService: ReviewService
     ): ProductRepository =
-        ProductRepository(productService, productDao)
+        ProductRepository(productService, productDao, reviewService)
 
 }

@@ -8,9 +8,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import dagger.android.support.DaggerFragment
 import dev.ronnie.adidasandroid.R
 import dev.ronnie.adidasandroid.data.entities.Product
@@ -18,6 +18,7 @@ import dev.ronnie.adidasandroid.databinding.FragmentProductListBinding
 import dev.ronnie.adidasandroid.presentation.adapters.ProductsAdapter
 import dev.ronnie.adidasandroid.presentation.viewModels.ProductListViewModel
 import dev.ronnie.adidasandroid.presentation.viewModels.ViewModelFactory
+import dev.ronnie.adidasandroid.utils.NetworkResource
 import dev.ronnie.adidasandroid.utils.hideSoftKeyboard
 import dev.ronnie.adidasandroid.utils.toast
 import kotlinx.coroutines.Job
@@ -34,6 +35,7 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
     private var job: Job? = null
 
     private val adapter = ProductsAdapter { product: Product -> navigateToDetails(product) }
+    private var hasBeenInitialized = false
 
     private lateinit var binding: FragmentProductListBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,19 +45,27 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
 
         binding.list.adapter = adapter
 
-        loadData()
-        listenToStatus()
+        if (!hasBeenInitialized) {
+            loadData()
+            hasBeenInitialized = true
+        }
+        listenToResults()
         setSearchView()
         binding.errorText.setOnClickListener {
             loadData()
         }
     }
 
-    private fun listenToStatus() {
-        viewModel.networkStatus.observe(viewLifecycleOwner, { event ->
-            event.getContentIfNotHandled()?.let { status ->
-                binding.progressCircular.isVisible = false
-                binding.errorText.isVisible = !status
+    private fun listenToResults() {
+        viewModel.result.observe(viewLifecycleOwner, { event ->
+            event.getContentIfNotHandled()?.let { resource ->
+                binding.errorText.isVisible = resource is NetworkResource.Failure
+                binding.progressCircular.isVisible = resource is NetworkResource.Loading
+
+                if (resource is NetworkResource.Success) {
+                    viewModel.saveData(resource.value)
+                }
+
             }
         })
     }
@@ -63,22 +73,19 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
     private fun loadData() {
         job?.cancel()
         job = lifecycleScope.launch {
-            binding.progressCircular.isVisible = true
-            binding.errorText.isVisible = false
             viewModel.getProducts().observe(viewLifecycleOwner, {
                 viewModel.productList = it as ArrayList<Product>
                 adapter.setData(it)
-
-                if (it.isNotEmpty()) {
-                    binding.errorText.isVisible = false
+                if (it.isNullOrEmpty()) {
+                    viewModel.fetchProducts()
                 }
-
             })
         }
     }
 
     private fun navigateToDetails(product: Product) {
-        requireContext().toast(product.toString())
+        binding.root.findNavController()
+            .navigate(ProductListFragmentDirections.toProductDetailFragment(product))
 
     }
 
