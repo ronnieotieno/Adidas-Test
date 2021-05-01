@@ -15,14 +15,14 @@ class RatingDiffCallback(private val oldList: List<Review>, private val newList:
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].text === newList[newItemPosition].text
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldPosition: Int, newPosition: Int): Boolean {
-        val (_, value, id) = oldList[oldPosition]
-        val (_, value1, id1) = newList[newPosition]
+        val (_, value, id1) = oldList[oldPosition]
+        val (_, value1, id2) = newList[newPosition]
 
-        return id == id1 && value == value1
+        return id1 == id2 && value == value1
     }
 
     override fun getChangePayload(oldPosition: Int, newPosition: Int): Any? {

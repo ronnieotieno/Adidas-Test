@@ -1,6 +1,7 @@
 package dev.ronnie.adidasandroid.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -91,7 +92,9 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
     private fun observeReviews(id: String) {
         viewModel.getProduct(id).observe(viewLifecycleOwner, {
             viewModel.product = it
-            adapter.setData(it.reviews)
+            //set ids to reviews
+            val reviews = viewModel.setIds(it.reviews)
+            adapter.setData(reviews)
 
         })
     }

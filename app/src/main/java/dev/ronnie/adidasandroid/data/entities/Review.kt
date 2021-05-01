@@ -8,5 +8,6 @@ data class Review(
     val locale: String,
     val productId: String,
     val rating: Int,
-    var text: String
+    var text: String,
+    var id: String = ""
 ):Parcelable
