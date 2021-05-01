@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import dagger.android.support.DaggerFragment
@@ -18,6 +19,7 @@ import dev.ronnie.adidasandroid.presentation.viewModels.ViewModelFactory
 import dev.ronnie.adidasandroid.utils.NetworkResource
 import dev.ronnie.adidasandroid.utils.makeSnackBar
 import dev.ronnie.adidasandroid.utils.toast
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -90,13 +92,14 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
 
     //observe changes in the product
     private fun observeReviews(id: String) {
-        viewModel.getProduct(id).observe(viewLifecycleOwner, {
-            viewModel.product = it
-            //set ids to reviews
-            val reviews = viewModel.setIds(it.reviews)
-            adapter.setData(reviews)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getProduct(id).observe(viewLifecycleOwner, {
+                viewModel.product = it
 
-        })
+                adapter.setData(it.reviews)
+
+            })
+        }
     }
 
     private fun setAppBar(name: String) {

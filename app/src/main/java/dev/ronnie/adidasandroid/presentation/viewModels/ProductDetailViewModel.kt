@@ -59,11 +59,4 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
 
     }
 
-    fun setIds(reviews: List<Review>): List<Review> {
-        return reviews.mapIndexed { index, review ->
-            review.id = index.toString()
-            review
-        }
-
-    }
 }

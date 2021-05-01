@@ -9,5 +9,4 @@ data class Review(
     val productId: String,
     val rating: Int,
     var text: String,
-    var id: String = ""
 ):Parcelable
