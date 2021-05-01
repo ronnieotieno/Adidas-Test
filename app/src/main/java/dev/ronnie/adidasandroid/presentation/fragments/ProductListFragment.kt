@@ -148,7 +148,7 @@ class ProductListFragment : DaggerFragment(R.layout.fragment_product_list) {
 
     }
 
-    //removes the focuse from searchview
+    //removes the focus from search view
     private fun removeFocus() {
         hideSoftKeyboard()
         binding.searchView.isFocusable = false

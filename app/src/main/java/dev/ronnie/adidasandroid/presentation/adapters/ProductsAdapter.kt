@@ -34,7 +34,6 @@ class ProductsAdapter(val onClick: (Product) -> Unit) :
         } else {
             setData(list)
         }
-
     }
 
     fun setData(list: List<Product>) {

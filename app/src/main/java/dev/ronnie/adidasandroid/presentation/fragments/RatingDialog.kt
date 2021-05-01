@@ -66,11 +66,14 @@ class RatingDialog : DialogFragment() {
         } catch (e: ClassCastException) {
             throw ClassCastException(
                 parentFragment.toString()
-                        + " must implement ChooseInterface"
+                        + " must implement SendInterface"
             )
         }
     }
 
+    /**
+     * setting the width to be at least 3/4 of the screen
+     */
     override fun onResume() {
         super.onResume()
         val displayRectangle = Rect()

@@ -8,6 +8,7 @@ import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.repositories.ProductRepository
 import dev.ronnie.adidasandroid.utils.Event
 import dev.ronnie.adidasandroid.utils.NetworkResource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,12 +31,10 @@ class ProductListViewModel @Inject constructor(private val repository: ProductRe
     }
 
     //saves the data to local storage
-    fun saveData(list: List<Product>) = viewModelScope.launch {
+    fun saveData(list: List<Product>) = viewModelScope.launch(Dispatchers.IO) {
         if (list.isNotEmpty()) {
             repository.saveData(list)
         }
-
-
     }
 
 }

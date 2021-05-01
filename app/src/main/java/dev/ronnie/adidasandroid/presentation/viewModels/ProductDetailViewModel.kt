@@ -9,6 +9,7 @@ import dev.ronnie.adidasandroid.data.entities.Review
 import dev.ronnie.adidasandroid.data.repositories.ProductRepository
 import dev.ronnie.adidasandroid.utils.Event
 import dev.ronnie.adidasandroid.utils.NetworkResource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -47,7 +48,7 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
      * product then update.
      */
 
-    fun updateProduct(review: Review) = viewModelScope.launch {
+    fun updateProduct(review: Review) = viewModelScope.launch(Dispatchers.IO) {
         product?.let {
             val reviews = it.reviews.toMutableList()
             reviews.add(0, review)
