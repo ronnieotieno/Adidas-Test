@@ -64,7 +64,7 @@ class ProductListViewModelTest {
     }
 
     @Test
-    fun insert_products_returns_2() {
+    fun insert_products_returns_2()  = runBlocking{
         val products = provideProducts(context)
         //Populate Db
         viewmodel.saveData(products)
