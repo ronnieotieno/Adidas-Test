@@ -21,7 +21,7 @@ Build System : [Gradle](https://gradle.org/)
 This project uses the Gradle build system. To build this project, use the
 `gradlew build` command or use "Import Project" in Android Studio. To connect to api first set up [Docker](https://www.docker.com/) in your local machine and clone `https://bitbucket.org/adichallenge/product-reviews-docker-composer.git` then run `docker-compose up` and wait for it build succesfully. Navigate to `~/src\main\java\dev\ronnie\adidasandroid\utils\Constants.kt` and replace `LOCAL_HOST` with yours. To make it work on your physical android device put your internal ip address, [Check how to get the address](https://lifehacker.com/how-to-find-your-local-and-external-ip-address-5833108#:~:text=Open%20up%20the%20Command%20Prompt,is%20your%20local%20IP%20address.)
 
-## The App
+## App
 The app loads the products the API and display it in a list. It also has Room DB for local cache.
 The product list fragment has a search bar which filters the list based on the search query.
 When the product is clicked, the app naviagates to Details fragment which shows a bigger picture, name, description on a collapsing toolbar and a list of reviews.The user can click add review button and a dialog opens up and if their review was submitted succefully the review list is automatically updated.
