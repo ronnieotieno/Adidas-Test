@@ -3,7 +3,7 @@
 
 An Android app consuming Api to display a sample list of products, built with MVVM pattern as well as Architecture Components. 
 
-Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/about/dashboards)
+Min Api Level : 21
 
 Build System : [Gradle](https://gradle.org/)
 
