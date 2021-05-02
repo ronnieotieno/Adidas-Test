@@ -6,7 +6,7 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dev.ronnie.adidasandroid.TheApp
+import dev.ronnie.adidasandroid.AdidasTestApp
 import dev.ronnie.adidasandroid.di.modules.AppModule
 import dev.ronnie.adidasandroid.di.modules.MainActivityModule
 import javax.inject.Singleton
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 /**
  * Generates [Component] which is install in the [Application] class.
  */
-interface AppComponent : AndroidInjector<TheApp> {
+interface AppComponent : AndroidInjector<AdidasTestApp> {
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -31,5 +31,5 @@ interface AppComponent : AndroidInjector<TheApp> {
         fun build(): AppComponent
     }
 
-    override fun inject(app: TheApp)
+    override fun inject(app: AdidasTestApp)
 }

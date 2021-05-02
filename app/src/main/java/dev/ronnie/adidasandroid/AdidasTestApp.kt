@@ -7,7 +7,7 @@ import dev.ronnie.adidasandroid.di.DaggerAppComponent
 /**
  * The application extends [DaggerApplication] which provide the necessary codes for the Dagger initialization, less boiler plate code.
  */
-class TheApp : DaggerApplication() {
+class AdidasTestApp : DaggerApplication() {
     private val applicationInjector = DaggerAppComponent.builder().application(this).build()
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> = applicationInjector
 }

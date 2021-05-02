@@ -5,6 +5,7 @@ import dev.ronnie.adidasandroid.api.ReviewService
 import dev.ronnie.adidasandroid.data.dao.ProductDao
 import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.entities.Review
+import kotlinx.coroutines.delay
 import retrofit2.Retrofit
 
 import javax.inject.Inject
@@ -30,6 +31,8 @@ class ProductRepository @Inject constructor(
     fun getSingleProduct(id: String) = productDao.getSingleProduct(id)
 
     suspend fun postReview(review: Review) = safeApiCall {
+        //Since its local it will just post instantly, we want to show that api call delay
+        delay(1000)
         reviewService.postReview(review.productId, review)
     }
 

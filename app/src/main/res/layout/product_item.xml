@@ -5,6 +5,7 @@
     android:foreground="?android:selectableItemBackground">
 
     <data>
+
         <variable
             name="isRound"
             type="java.lang.Boolean" />

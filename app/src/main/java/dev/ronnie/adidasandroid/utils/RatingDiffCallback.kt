@@ -5,7 +5,7 @@ import dev.ronnie.adidasandroid.data.entities.Product
 import dev.ronnie.adidasandroid.data.entities.Review
 
 /**
- * Compares items to avoid dropping the whole list when the Adapter ist changes.Effective in filter
+ * Compares items to avoid dropping the whole list when the Adapter list changes.
  */
 class RatingDiffCallback(private val oldList: List<Review>, private val newList: List<Review>) :
     DiffUtil.Callback() {

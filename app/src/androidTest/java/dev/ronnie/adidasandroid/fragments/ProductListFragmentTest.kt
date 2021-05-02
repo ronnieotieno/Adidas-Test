@@ -1,6 +1,6 @@
 package dev.ronnie.adidasandroid.fragments
 
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -19,19 +19,19 @@ class ProductListFragmentTest {
 
     @Test
     fun recyclerview_is_showing() {
-        Espresso.onView(withId(R.id.list))
+        onView(withId(R.id.list))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun searchView_is_showing() {
-        Espresso.onView(withId(R.id.searchView))
+        onView(withId(R.id.searchView))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun toolbar_is_showing(): Unit = runBlocking {
-        Espresso.onView(withId(R.id.toolbar))
+        onView(withId(R.id.toolbar))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 }

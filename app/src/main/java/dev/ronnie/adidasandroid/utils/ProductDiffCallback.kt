@@ -5,7 +5,7 @@ import dev.ronnie.adidasandroid.data.entities.Product
 
 
 /**
- * Compares items to avoid dropping the whole list when the Adapter ist changes.Effective in filter
+ * Compares items to avoid dropping the whole list when the Adapter list changes.
  */
 class ProductDiffCallback(private val oldList: List<Product>, private val newList: List<Product>) :
     DiffUtil.Callback() {
