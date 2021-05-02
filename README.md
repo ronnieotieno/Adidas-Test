@@ -10,7 +10,7 @@ Build System : [Gradle](https://gradle.org/)
 ## Table of Contents
 
 - [Prerequisite](#prerequisite)
-- [The App](#the App)
+- [App](#app)
 - [Architecture](#architecture)
 - [Testing](#testing)
 - [Libraries](#libraries)
