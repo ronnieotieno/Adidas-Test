@@ -100,8 +100,8 @@ class ProductDetailFragmentTest {
         //submit review
         submitButton.perform(click())
 
-        //wait for the network call and list update
-        delay(1000)
+        //since the delay was added, wait for it to update
+        delay(2000)
 
         //confirm that the review was added
         onView(withId(R.id.rating_list)).check(
