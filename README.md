@@ -51,11 +51,9 @@ and supports coroutines out of the box.  Used for the newtwork calls.
 
 ## Demo
 
-|<img src="screenshots/home.jpg" width=200/>|<img src="screenshots/search.jpg" width=200/>|<img src="screenshots/error.jpg" width=200/>|
+|<img src="screenshots/home.jpg" width=200/>|<img src="screenshots/search.jpg" width=200/>|<img src="screenshots/full.jpg" width=200/>|
 |:----:|:----:|:----:|
 
-|<img src="screenshots/full.jpg" width=200/>|<img src="screenshots/collapsed.jpg" width=200/>|
+|<img src="screenshots/collapsed.jpg" width=200/>|<img src="screenshots/dialog.jpg" width=200/>|
 |:----:|:----:|
 
-|<img src="screenshots/dialog.jpg" width=200/>|
-|:----:|
