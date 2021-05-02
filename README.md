@@ -52,7 +52,7 @@ and supports coroutines out of the box.  Used for the newtwork calls.
 ## Demo
 You can get a video detaling the usage [Here](https://drive.google.com/file/d/1OsGM0QfI5sjC6SL8IFU5zMN8xWMBfXCr/view?usp=sharing)
 
-##Screenshots
+## Screenshots
 
 |<img src="screenshots/home.jpg" width=200/>|<img src="screenshots/search.jpg" width=200/>|<img src="screenshots/full.jpg" width=200/>|
 |:----:|:----:|:----:|
