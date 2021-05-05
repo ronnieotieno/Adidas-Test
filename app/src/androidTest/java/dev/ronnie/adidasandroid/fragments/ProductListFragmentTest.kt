@@ -30,8 +30,10 @@ class ProductListFragmentTest {
     }
 
     @Test
-    fun toolbar_is_showing(): Unit = runBlocking {
-        onView(withId(R.id.toolbar))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    fun toolbar_is_showing() {
+        runBlocking {
+            onView(withId(R.id.toolbar))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        }
     }
 }

@@ -44,9 +44,11 @@ class ProductDetailFragmentTest {
     }
 
     @Test
-    fun appbar_is_showing(): Unit = runBlocking {
-        onView(withId(R.id.appbar))
-            .check(ViewAssertions.matches(isDisplayed()))
+    fun appbar_is_showing() {
+        runBlocking {
+            onView(withId(R.id.appbar))
+                .check(ViewAssertions.matches(isDisplayed()))
+        }
     }
 
     @Test
@@ -63,55 +65,58 @@ class ProductDetailFragmentTest {
 
     //Should fail if there is no internet connection or if the Api wasn't reached.
     @Test
-    fun test_add_review(): Unit = runBlocking {
-        val addReviewButton = onView(
-            allOf(
-                withId(R.id.add_review)
-            )
-        )
+    fun test_add_review() {
 
-        //click add review button
-        addReviewButton.perform(click())
-
-        //wait for the dialog to show
-        delay(1000)
-        val ratingBar = onView(
-            allOf(
-                withId(R.id.ratingBar)
-            )
-        )
-        //set rating
-        ratingBar.perform(SetRating(5f))
-        val textView = onView(
-            allOf(
-                withId(R.id.text)
-            )
-        )
-
-        //set text review
-        textView.perform(ViewActions.replaceText("I like this shoe"))
-
-        val submitButton = onView(
-            allOf(
-                withId(R.id.confirm)
-            )
-        )
-
-        //submit review
-        submitButton.perform(click())
-
-        //since the delay was added, wait for it to update
-        delay(2000)
-
-        //confirm that the review was added
-        onView(withId(R.id.rating_list)).check(
-            ViewAssertions.matches(
-                atPosition(
-                    0,
-                    hasDescendant(withText("I like this shoe"))
+        runBlocking {
+            val addReviewButton = onView(
+                allOf(
+                    withId(R.id.add_review)
                 )
             )
-        )
 
+            //click add review button
+            addReviewButton.perform(click())
+
+            //wait for the dialog to show
+            delay(1000)
+            val ratingBar = onView(
+                allOf(
+                    withId(R.id.ratingBar)
+                )
+            )
+            //set rating
+            ratingBar.perform(SetRating(5f))
+            val textView = onView(
+                allOf(
+                    withId(R.id.text)
+                )
+            )
+
+            //set text review
+            textView.perform(ViewActions.replaceText("I like this shoe"))
+
+            val submitButton = onView(
+                allOf(
+                    withId(R.id.confirm)
+                )
+            )
+
+            //submit review
+            submitButton.perform(click())
+
+            //since the delay was added, wait for it to update
+            delay(2000)
+
+            //confirm that the review was added
+            onView(withId(R.id.rating_list)).check(
+                ViewAssertions.matches(
+                    atPosition(
+                        0,
+                        hasDescendant(withText("I like this shoe"))
+                    )
+                )
+            )
+
+        }
     }
 }
