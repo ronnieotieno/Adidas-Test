@@ -1,7 +1,6 @@
 package dev.ronnie.adidasandroid.network
 
 import android.content.Context
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.ronnie.adidasandroid.api.ProductService
 import kotlinx.coroutines.runBlocking
@@ -10,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -67,9 +67,9 @@ class ApiTest {
     @Test
     fun test_response() = runBlocking {
         val data = productService.getProducts()
-        ViewMatchers.assertThat(data[0].name, CoreMatchers.equalTo("New Shoe"))
-        ViewMatchers.assertThat(data[1].description, CoreMatchers.equalTo("Good for summer"))
-        ViewMatchers.assertThat(data.size, CoreMatchers.equalTo(2))
+        assertThat(data[0].name, CoreMatchers.equalTo("New Shoe"))
+        assertThat(data[1].description, CoreMatchers.equalTo("Good for summer"))
+        assertThat(data.size, CoreMatchers.equalTo(2))
     }
 
 }

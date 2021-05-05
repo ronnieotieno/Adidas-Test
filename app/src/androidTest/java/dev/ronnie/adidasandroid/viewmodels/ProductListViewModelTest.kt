@@ -3,7 +3,6 @@ package dev.ronnie.adidasandroid.viewmodels
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.ronnie.adidasandroid.MainActivity
@@ -17,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.hamcrest.CoreMatchers
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -69,6 +69,6 @@ class ProductListViewModelTest {
         //Populate Db
         viewmodel.saveData(products)
 
-        ViewMatchers.assertThat(getValue(viewmodel.getProducts()).size, CoreMatchers.equalTo(2))
+       assertThat(getValue(viewmodel.getProducts()).size, CoreMatchers.equalTo(2))
     }
 }

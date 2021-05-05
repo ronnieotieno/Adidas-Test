@@ -3,7 +3,7 @@ package dev.ronnie.adidasandroid.viewmodels
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.espresso.matcher.ViewMatchers
+import org.hamcrest.MatcherAssert.assertThat
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.ronnie.adidasandroid.MainActivity
@@ -85,7 +85,7 @@ class ProductDetailViewModelTest {
         viewmodel.updateProduct(addReview)
 
         //check if reviews size increased by 1
-        ViewMatchers.assertThat(
+      assertThat(
             getValue(viewmodel.getProduct(updateProduct.id)).reviews.size,
             CoreMatchers.equalTo(originalReviewSize + 1)
         )
