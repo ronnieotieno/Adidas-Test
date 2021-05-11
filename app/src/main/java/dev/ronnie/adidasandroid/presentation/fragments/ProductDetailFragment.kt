@@ -1,9 +1,7 @@
 package dev.ronnie.adidasandroid.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
@@ -24,13 +22,12 @@ import javax.inject.Inject
 import kotlin.math.abs
 
 
-class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
-    RatingDialog.SendInterface {
+class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details) {
 
     private lateinit var binding: FragmentProductDetailsBinding
     private val args = ProductDetailFragmentArgs
     private val adapter = RatingsAdapter()
-    private val dialog = RatingDialog()
+    private val dialog = RatingDialog { pair: Pair<String, Int> -> sendRating(pair) }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -119,7 +116,7 @@ class ProductDetailFragment : DaggerFragment(R.layout.fragment_product_details),
     }
 
     //send rating and observe the response
-    override fun sendRating(rating: Pair<String, Int>) {
+    private fun sendRating(rating: Pair<String, Int>) {
         val snackBar = makeSnackBar()
         viewModel.result.observe(viewLifecycleOwner, { event ->
             event.getContentIfNotHandled()?.let {

@@ -31,7 +31,7 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
         //posts loading
         _result.value = Event(NetworkResource.Loading)
 
-        val review = product?.id?.let { Review("", it, pair.second, pair.first) }
+        val review = product?.id?.let { prodId -> Review("", prodId, pair.second, pair.first) }
 
         //posts the results can be success or failure
         _result.value = Event(repository.postReview(review!!))
@@ -49,11 +49,11 @@ class ProductDetailViewModel @Inject constructor(private val repository: Product
      */
 
     fun updateProduct(review: Review) = viewModelScope.launch(Dispatchers.IO) {
-        product?.let {
-            val reviews = it.reviews.toMutableList()
+        product?.let { prod ->
+            val reviews = prod.reviews.toMutableList()
             reviews.add(0, review)
-            it.reviews = reviews
-            repository.insertProduct(it)
+            prod.reviews = reviews
+            repository.insertProduct(prod)
         }
 
 
